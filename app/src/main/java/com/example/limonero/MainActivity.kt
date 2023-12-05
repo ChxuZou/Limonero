@@ -63,7 +63,7 @@ fun BarraInicial(modifier: Modifier = Modifier) {
             text = stringResource(R.string.app_name),
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            modifier = Modifier.padding(25.dp)
+            modifier = Modifier.padding(top = 25.dp)
         )
     }
 }
@@ -71,20 +71,12 @@ fun BarraInicial(modifier: Modifier = Modifier) {
 @Composable
 fun ImagenesYTexto() {
     var numImagenYTexto by remember { mutableStateOf(1) }
-    var esLimon = false
-    var contadorClicksLimon by remember { mutableStateOf(0) }
-    var randomNum: Int by remember { mutableStateOf((1..3).random()) }
+    var contadorClicksRestantesLimon by remember { mutableStateOf((2..4).random()) }
 
     //Condición de reset
     if (numImagenYTexto > 4) {
         numImagenYTexto = 1
-        contadorClicksLimon = 0
-        randomNum = (1..3).random()
-    }
-
-    //Condición de bucle
-    if (numImagenYTexto == 2) {
-        esLimon = contadorClicksLimon != randomNum
+        contadorClicksRestantesLimon = (2..4).random()
     }
 
     //Asignación de imagen
@@ -110,11 +102,16 @@ fun ImagenesYTexto() {
     ) {
         Button(
             onClick = {
-                if (!esLimon) {
+                if(numImagenYTexto != 2) {
                     numImagenYTexto++
                 } else {
-                    contadorClicksLimon++
+                    contadorClicksRestantesLimon--
+
+                    if(contadorClicksRestantesLimon<=0) {
+                        numImagenYTexto++
+                    }
                 }
+
             },
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier.padding(all = 20.dp),
@@ -128,11 +125,11 @@ fun ImagenesYTexto() {
                 contentDescription = null
             )
         }
+
         Text(
             text = texto,
             fontWeight = FontWeight.SemiBold
         )
-
 
     }
 }
