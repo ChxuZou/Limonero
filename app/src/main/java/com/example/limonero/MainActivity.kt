@@ -71,12 +71,12 @@ fun BarraInicial(modifier: Modifier = Modifier) {
 @Composable
 fun ImagenesYTexto() {
     var numImagenYTexto by remember { mutableStateOf(1) }
-    var contadorClicksRestantesLimon by remember { mutableStateOf((2..4).random()) }
+    var contadorClicksRestantesLimon by remember { mutableStateOf((1..3).random()) }
 
     //Condición de reset
     if (numImagenYTexto > 4) {
         numImagenYTexto = 1
-        contadorClicksRestantesLimon = (2..4).random()
+        contadorClicksRestantesLimon = (1..3).random()
     }
 
     //Asignación de imagen
@@ -102,14 +102,10 @@ fun ImagenesYTexto() {
     ) {
         Button(
             onClick = {
-                if(numImagenYTexto != 2) {
+                if(numImagenYTexto != 2 || contadorClicksRestantesLimon<=0) {
                     numImagenYTexto++
                 } else {
                     contadorClicksRestantesLimon--
-
-                    if(contadorClicksRestantesLimon<=0) {
-                        numImagenYTexto++
-                    }
                 }
 
             },
