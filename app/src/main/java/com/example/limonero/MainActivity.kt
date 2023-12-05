@@ -34,61 +34,61 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-                LemonApp()
+            LemonApp()
         }
     }
 }
 
 @Composable
 fun LemonApp() {
-        Column (
-            modifier = Modifier.fillMaxSize()
-        ){
-            BarraInicial()
-            ImagenesYTexto()
-        }
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        BarraInicial()
+        ImagenesYTexto()
+    }
 }
 
 @Composable
 fun BarraInicial(modifier: Modifier = Modifier) {
-    Column (
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .fillMaxHeight(0.1F)
             .background(Color.Yellow),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         Text(
             text = stringResource(R.string.app_name),
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier.padding(30.dp)
         )
     }
 }
 
 @Composable
-fun ImagenesYTexto(){
+fun ImagenesYTexto() {
     var numImagenYTexto by remember { mutableStateOf(1) }
     var esLimon = false
     var contadorClicksLimon by remember { mutableStateOf(0) }
-    var randomNum: Int by remember { mutableStateOf( (1..3).random() )}
+    var randomNum: Int by remember { mutableStateOf((1..3).random()) }
 
     //Condición de reset
-    if(numImagenYTexto>4){
+    if (numImagenYTexto > 4) {
         numImagenYTexto = 1
         contadorClicksLimon = 0
         randomNum = (1..3).random()
     }
 
     //Condición de bucle
-    if(numImagenYTexto==2) {
-        esLimon= contadorClicksLimon!=randomNum
+    if (numImagenYTexto == 2) {
+        esLimon = contadorClicksLimon != randomNum
     }
 
     //Asignación de imagen
-    val imagen = when(numImagenYTexto) {
+    val imagen = when (numImagenYTexto) {
         1 -> R.drawable.limonero
         2 -> R.drawable.limon
         3 -> R.drawable.zumo_limon
@@ -96,26 +96,26 @@ fun ImagenesYTexto(){
     }
 
     //Asignación de texto
-    val texto = when (numImagenYTexto){
+    val texto = when (numImagenYTexto) {
         1 -> stringResource(R.string.limonero)
         2 -> stringResource(R.string.limon)
         3 -> stringResource(R.string.zumo_limon)
         else -> stringResource(R.string.vaso_vacio)
     }
 
-    Column (
+    Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         Button(
             onClick = {
-                if(esLimon == false) {
-                numImagenYTexto++
-            } else {
-                contadorClicksLimon++
-            }
-                      },
+                if (!esLimon) {
+                    numImagenYTexto++
+                } else {
+                    contadorClicksLimon++
+                }
+            },
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier.padding(all = 20.dp),
             colors = ButtonDefaults.buttonColors(
@@ -123,12 +123,15 @@ fun ImagenesYTexto(){
             )
 
         ) {
-            Image(painter = painterResource(imagen), contentDescription = null)
+            Image(
+                painter = painterResource(imagen),
+                contentDescription = null
+            )
         }
         Text(
             text = texto,
             fontWeight = FontWeight.SemiBold
-            )
+        )
 
 
     }
@@ -137,5 +140,5 @@ fun ImagenesYTexto(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-        LemonApp()
+    LemonApp()
 }
