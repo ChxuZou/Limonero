@@ -63,7 +63,7 @@ fun BarraInicial(modifier: Modifier = Modifier) {
             text = stringResource(R.string.app_name),
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            modifier = Modifier.padding(30.dp)
+            modifier = Modifier.padding(25.dp)
         )
     }
 }
